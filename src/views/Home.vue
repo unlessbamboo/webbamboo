@@ -25,6 +25,12 @@
         </el-card>
       </div>
     </div>
+    <div class="footer-container">
+      <!-- Footer with record information -->
+      <footer style="text-align: center; margin-top: 20px; color: white">
+        <p>浙ICP备18007284号</p>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -55,6 +61,10 @@ export default {
   padding: 0 20%;
   background-image: url(~@/assets/img/bg.jpg);
   background-size: 100%;
+}
+
+.footer-container {
+  padding-bottom: 5px;
 }
 
 .option-row-container {
