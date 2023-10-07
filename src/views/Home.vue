@@ -28,7 +28,7 @@
     <div class="footer-container">
       <!-- Footer with record information -->
       <footer style="text-align: center; margin-top: 20px; color: white">
-        <p>浙ICP备18007284号</p>
+        <p><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备18007284号-1</a></p>
       </footer>
     </div>
   </div>
@@ -65,6 +65,15 @@ export default {
 
 .footer-container {
   padding-bottom: 5px;
+}
+
+a {
+  text-decoration: none; /* 移除下划线 */
+  color: inherit; /* 使链接颜色与其父元素相同 */
+  cursor: pointer; /* 通常，链接会有一个手形光标，但您可以根据需要调整 */
+  background-color: transparent; /* 移除背景色 */
+  font-style: inherit; /* 防止斜体样式 */
+  font-weight: inherit; /* 防止加粗 */
 }
 
 .option-row-container {
