@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="carousel-container">
-      <div class="carousel-container-ul">
+      <div class="carousel-container-ul" @mouseover="pauseInterval" @mouseout="startInterval">
         <!-- a. 向前的图标 -->
         <i class="el-icon-arrow-left carousel-arrow" @click="scroll(-1)"></i>
 
@@ -45,6 +45,14 @@
                 <el-card class="option">
                   <div class="card-label">接口</div>
                   <a class="card-image card-swagger font-huerotate">Gin</a>
+                </el-card>
+              </div>
+            </li>
+            <li>
+              <div class="option-wrapper" @click="goTo('cssexample')">
+                <el-card class="option">
+                  <div class="card-label">项目</div>
+                  <a class="card-image font-neon">css示例</a>
                 </el-card>
               </div>
             </li>
@@ -97,6 +105,8 @@ export default {
       } else if (destination == "django") {
         // window.location.href = process.env.VUE_APP_SHOP_DJANGO_HOST;
         window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
+      } else if (destination == "cssexample") {
+        this.$router.push("/cssexample");
       } else {
         window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
       }
@@ -121,20 +131,27 @@ export default {
       // carousel.scrollLeft += scrollAmount * direction;
       this.currentScrollIndex = carousel.scrollLeft / scrollAmount;
     },
+    /* 启动和暂停定时器 */
+    startInterval() {
+      this.autoScrollInterval = setInterval(() => {
+        if (this.currentScrollIndex >= this.maxScrollIndex) {
+          const carousel = this.$refs.carousel;
+          this.currentScrollIndex = 0;
+          carousel.scrollLeft = 0;
+        } else {
+          this.scroll(1);
+        }
+      }, 5000);
+    },
+    pauseInterval() {
+      clearInterval(this.autoScrollInterval);
+    },
   },
   mounted() {
-    this.autoScrollInterval = setInterval(() => {
-      if (this.currentScrollIndex >= this.maxScrollIndex) {
-        const carousel = this.$refs.carousel;
-        this.currentScrollIndex = 0;
-        carousel.scrollLeft = 0;
-      } else {
-        this.scroll(1);
-      }
-    }, 5000);
+    this.startInterval();
   },
   beforeDestory() {
-    clearInterval(this.autoScrollInterval);
+    this.pauseInterval();
   },
 };
 </script>
@@ -188,7 +205,7 @@ li {
 }
 
 .options-container {
-  margin-top: 100px;
+  margin-top: 10px;
   width: 990px;
 }
 

@@ -14,6 +14,14 @@ npm i
 npm run serve
 ```
 
+注意, 对于某些本地 html, css, js 文件, 这些原生文件如果希望在本地打开, 则可以通过`http-server`来实现类似 vscode 的效果:
+
+```sh
+npm install -g http-server
+cd /path/to/your/directory
+http-server
+```
+
 ### 关联项目
 
 - 个人管理后台: [vue-shop](https://github.com/unlessbamboo/vue-shop)
