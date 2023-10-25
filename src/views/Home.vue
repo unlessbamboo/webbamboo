@@ -106,7 +106,7 @@ export default {
       const carousel = this.$refs.carousel;
       const scrollAmount = 330;
       const step = direction * 10; // 每一帧滚动的距离
-      const frames = scrollAmount / step; // 需要的帧数
+      const frames = scrollAmount / Math.abs(step); // 需要的帧数
       let frameCount = 0; // 当前帧数
 
       /* 添加动画效果 */
