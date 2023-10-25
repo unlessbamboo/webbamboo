@@ -1,43 +1,105 @@
 <template>
   <!-- 页面功能: 进度指示器 -->
   <div class="container">
-    <div class="progress-container">
-      <div class="progress" id="progress"></div>
-      <div class="circle active">1</div>
-      <div class="circle">2</div>
-      <div class="circle">3</div>
-      <div class="circle">4</div>
+    <div class="container-wrapper">
+      <div class="progress-container">
+        <div class="progress" :style="{ width: progressWidth }" ref="progress"></div>
+        <div
+          v-for="(circle, index) in maxCircleNum"
+          :key="index"
+          :class="{ circle: true, active: index + 1 <= currentActive }">
+          {{ index + 1 }}
+        </div>
+      </div>
+      <button class="btn" @click="decrement" :disabled="currentActive === 1">Prev</button>
+      <button class="btn" @click="increment" :disabled="currentActive === maxCircleNum">Next</button>
     </div>
-    <button class="btn" id="prev" disabled>Prev</button>
-    <button class="btn" id="next">Next</button>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      currentActive: 1,
+      maxCircleNum: 4,
+    };
+  },
+  computed: {
+    progressWidth() {
+      return ((this.currentActive - 1) / 3) * 100 + "%";
+    },
+  },
+  methods: {
+    increment() {
+      this.currentActive++;
+      if (this.currentActive > this.maxCircleNum) this.currentActive = this.maxCircleNum;
+    },
+    decrement() {
+      this.currentActive--;
+      if (this.currentActive < 1) this.currentActive = 1;
+    },
+  },
+  mounted() {},
+};
+</script>
 
 <style scope>
+/*
+   定义了两个 CSS 自定义属性, 其中:root表示这些变量全局可用
+ */
+:root {
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .container {
+  background-color: #f6f7fb;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-wrapper {
   text-align: center;
 }
 
 .progress-container {
+  /* 弹性容器*/
   display: flex;
+  /* 子元素之间平均分配空间 */
   justify-content: space-between;
   position: relative;
   margin-bottom: 30px;
   max-width: 100%;
   width: 350px;
+  z-index: 1;
 }
 
+/* 创建了一个宽度为100%、高度为4像素的水平条状伪元素，并将其垂直居中并放置在其他子元素的底部。这条线代表了进度条的背景，表示进度尚未完成的部分 */
 .progress-container::before {
-  content: ""; /* Mandatory with ::before */
-  background-color: var(--line-border-empty); /* 进度尚未完成的颜色 */
+  content: ""; /* 伪元素内容 */
+  background-color: var(--line-border-empty); /* 设置伪元素的背景颜色: 进度尚未完成的颜色 */
+
+  /* 设置伪元素的宽度为其父元素的100%, 高度为4px, 从而产生一条灰色直线 */
+  height: 4px;
+  width: 100%;
+
+  /* 将伪元素的上边缘定位到其父元素高度的中心，并将左边缘定位到父元素的左边缘 */
   position: absolute;
   top: 50%;
   left: 0;
+  /* 通过 Y 轴的负偏移将伪元素向上移动其自身高度的 50%, 结合top, 确保伪元素在垂直方向居中 */
   transform: translateY(-50%);
-  height: 4px;
-  width: 100%;
+
   z-index: -1;
 }
 

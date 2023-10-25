@@ -114,6 +114,9 @@ export default {
     /* 根据direction来决定移动 */
     scroll(direction) {
       const carousel = this.$refs.carousel;
+      if (!carousel) {
+        return;
+      }
       const scrollAmount = 330;
       const step = direction * 10; // 每一帧滚动的距离
       const frames = scrollAmount / Math.abs(step); // 需要的帧数

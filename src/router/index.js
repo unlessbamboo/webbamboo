@@ -3,6 +3,7 @@ import Router from "vue-router";
 
 const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
 const Cssexample = () => import(/* webpackChunkName: "cssexample" */ "@/views/Cssexample.vue");
+const CssProgress = () => import(/* webpackChunkName: "progress" */ "@/views/Progress.vue");
 
 Vue.use(Router);
 
@@ -11,13 +12,14 @@ export default new Router({
     {
       path: "/",
       component: Home,
-      meta: {title: "bamboo主页"},
+      meta: { title: "bamboo主页" },
     },
     {
       path: "/cssexample",
       component: Cssexample,
-      meta: {title: "css示例页"},
+      meta: { title: "css示例页" },
     },
-    {path: "*", redirect: "/"},
+    { path: "/progress", component: CssProgress, meta: { title: "进度条" } },
+    { path: "*", redirect: "/" },
   ],
 });
