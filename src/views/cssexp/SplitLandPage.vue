@@ -1,13 +1,21 @@
 <template>
   <div class="csscontainer-wrapper">
-    <div class="csscontainer hover-left" ref="csscontainer">
+    <div class="csscontainer" ref="csscontainer">
       <div class="split left" @mouseenter="splitEnterLeft" @mouseleave="splitLeaveLeft">
         <h1>PlayStation 5</h1>
         <a href="#" class="btn">Buy Now</a>
       </div>
+
       <div class="split right" @mouseenter="splitEnterRight" @mouseleave="splitLeaveRight">
-        <h1>Xbox Series X</h1>
-        <a href="#" class="btn">Buy Now</a>
+        <h3>分割页面随鼠标移动测试页面</h3>
+        <div class="page-content">
+          <p>这是一个测试div宽度跟随鼠标进行移动动画的测试页面.</p>
+          <ul>
+            <li>a. css的变量定义在多个vue页面中不能定义相同变量, 例如:root, 否则可能会产生冲突</li>
+            <li>b. 按钮使用absolute进行居中定位确保里面的a链接标签居中</li>
+            <li>c. 左右两个页面通过before伪元素设置一个100%高宽的背景色</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -34,16 +42,59 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-h1 {
-  font-size: 4rem;
+h1,
+h3 {
   color: #fff;
   position: absolute;
   left: 50%;
   top: 20%;
   transform: translateX(-50%);
   white-space: nowrap;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+.csscontainer-wrapper {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+
+  --left-bg-color: rgba(87, 84, 236, 0.7);
+  --right-bg-color: rgba(43, 43, 43, 0.8);
+  --left-btn-hover-color: rgba(87, 84, 236, 1);
+  --right-btn-hover-color: rgba(28, 122, 28, 1);
+  --hover-width: 80%;
+  --minimize-width: 20%;
+  --transition-speed: 1s;
+}
+
+.csscontainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #333;
+}
+
+.page-content {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  width: 100%;
+  padding: 1.5rem;
 }
 
 .btn {
@@ -65,37 +116,13 @@ h1 {
 }
 
 .split.left .btn:hover {
-  background-color: rgba(87, 84, 236, 1);
-  border-color: rgba(87, 84, 236, 1);
+  background-color: var(--left-btn-hover-color);
+  border-color: var(--left-btn-hover-color);
 }
 
 .split.right .btn:hover {
-  /* background-color: var(--right-btn-hover-color); */
-  /* border-color: var(--right-btn-hover-color); */
-  background-color: rgba(28, 122, 28, 1);
-  border-color: rgba(28, 122, 28, 1);
-}
-
-.csscontainer-wrapper {
-  font-family: "Roboto", sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-
-  --left-bg-color: rgba(87, 84, 236, 0.7);
-  --right-bg-color: rgba(43, 43, 43, 0.8);
-  --left-btn-hover-color: rgba(87, 84, 236, 1);
-  --right-btn-hover-color: rgba(28, 122, 28, 1);
-  --hover-width: 75%;
-  --minimize-width: 25%;
-  --transition-speed: 1s;
-}
-
-.csscontainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #333;
+  background-color: var(--right-btn-hover-color);
+  border-color: var(--right-btn-hover-color);
 }
 
 .split {
