@@ -6,6 +6,7 @@
         <li><router-link to="/cssexp/progress">css进度条示例</router-link></li>
         <li><router-link to="/cssexp/navrotating">旋转导航实例</router-link></li>
         <li><router-link to="/cssexp/search">搜索框实例</router-link></li>
+        <li><router-link to="/cssexp/splitelangpage">切割页面实例</router-link></li>
       </ul>
     </div>
   </div>

@@ -45,19 +45,17 @@ export default {
 </script>
 
 <style scope>
-/*
-   定义了两个 CSS 自定义属性, 其中:root表示这些变量全局可用
- */
-:root {
-  --line-border-fill: #3498db;
-  --line-border-empty: #e0e0e0;
-}
-
 * {
   box-sizing: border-box;
 }
 
+/*
+   定义了两个 CSS 自定义属性, 其中:root表示这些变量全局可用, 这样可能冲突
+ */
 .container {
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+
   /* 1. 占满全屏的淡灰色背景色; 2. flexbox模式, 确保其在主轴和交叉轴下的居中 */
   background-color: #f6f7fb;
   height: 100vh;

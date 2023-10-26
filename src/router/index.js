@@ -7,6 +7,7 @@ const Cssexample = () => import(/* webpackChunkName: "cssexample" */ "@/views/cs
 const CssProgress = () => import(/* webpackChunkName: "progress" */ "@/views/cssexp/Progress.vue");
 const NavRotating = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/NavRotating.vue");
 const Search = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/Search.vue");
+const SplitLandPage = () => import(/* webpackChunkName: "splitelangpage" */ "@/views/cssexp/SplitLandPage.vue");
 
 Vue.use(Router);
 
@@ -25,6 +26,7 @@ export default new Router({
         { path: "progress", component: CssProgress, meta: { title: "进度条" } },
         { path: "navrotating", component: NavRotating, meta: { title: "旋转导航" } },
         { path: "search", component: Search, meta: { title: "搜索框" } },
+        { path: "splitelangpage", component: SplitLandPage, meta: { title: "切割页面" } },
       ],
     },
     { path: "*", redirect: "/" },

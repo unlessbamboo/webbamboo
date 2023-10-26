@@ -87,6 +87,12 @@ export default {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5em;
+}
+
 .conatiner-wrapper {
   font-family: "Lato", sans-serif;
   background-color: #333;
