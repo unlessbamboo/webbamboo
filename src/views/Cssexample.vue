@@ -4,6 +4,7 @@
     <div class="css-container">
       <ul>
         <li><router-link to="/progress">css进度条示例</router-link></li>
+        <li><router-link to="/navrotating">旋转导航实例</router-link></li>
       </ul>
     </div>
   </div>
