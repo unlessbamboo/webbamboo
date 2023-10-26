@@ -38,6 +38,10 @@
             在Content的右边出现两个垂直竖线, 高度和内容区保持一致, 猜测可能是div.content样式问题.
             最后经过排查发现是div.content多了一个overflow-y的样式导致右侧出现了一个滚动条.
           </li>
+          <li>
+            nav采用固定定位的方式, 至于为何初始的时候nav下面的li会隐藏则是下属的li的样式导致的,
+            主要是这个color为fff导致的, 并非z-index导致被content覆盖, 一开始以为是z-index导致被覆盖, 从而找了好久的问题
+          </li>
         </ol>
       </div>
     </div>
@@ -176,6 +180,7 @@ nav {
   position: fixed;
   bottom: 40px;
   left: 0;
+  /* 确保层级最高 */
   z-index: 100;
 }
 
@@ -186,6 +191,7 @@ nav ul {
 
 nav ul li {
   text-transform: uppercase;
+  /* 颜色为白色, 从而跟conteng的背景色相融合, 在content进行偏移的时候就显示出来了, 6啊 */
   color: #fff;
   margin: 40px 0;
   transform: translateX(-100%);
