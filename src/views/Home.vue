@@ -106,7 +106,7 @@ export default {
         // window.location.href = process.env.VUE_APP_SHOP_DJANGO_HOST;
         window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
       } else if (destination == "cssexample") {
-        this.$router.push("/cssexample");
+        this.$router.push("/cssexp");
       } else {
         window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
       }

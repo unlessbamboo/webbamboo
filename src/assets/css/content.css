@@ -13,3 +13,7 @@ h2,
 h3 {
   margin-bottom: 0.5em;
 }
+
+* {
+  box-sizing: border-box;
+}

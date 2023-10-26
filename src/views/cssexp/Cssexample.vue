@@ -3,8 +3,9 @@
   <div class="container">
     <div class="css-container">
       <ul>
-        <li><router-link to="/progress">css进度条示例</router-link></li>
-        <li><router-link to="/navrotating">旋转导航实例</router-link></li>
+        <li><router-link to="/cssexp/progress">css进度条示例</router-link></li>
+        <li><router-link to="/cssexp/navrotating">旋转导航实例</router-link></li>
+        <li><router-link to="/cssexp/search">搜索框实例</router-link></li>
       </ul>
     </div>
   </div>

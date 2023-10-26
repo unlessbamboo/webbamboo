@@ -2,9 +2,11 @@ import Vue from "vue";
 import Router from "vue-router";
 
 const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
-const Cssexample = () => import(/* webpackChunkName: "cssexample" */ "@/views/Cssexample.vue");
-const CssProgress = () => import(/* webpackChunkName: "progress" */ "@/views/Progress.vue");
-const NavRotating = () => import(/* webpackChunkName: "navrotating" */ "@/views/NavRotating.vue");
+const CssLayout = () => import(/* webpackChunkName: "csslayout" */ "@/views/CssLayout.vue");
+const Cssexample = () => import(/* webpackChunkName: "cssexample" */ "@/views/cssexp/Cssexample.vue");
+const CssProgress = () => import(/* webpackChunkName: "progress" */ "@/views/cssexp/Progress.vue");
+const NavRotating = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/NavRotating.vue");
+const Search = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/Search.vue");
 
 Vue.use(Router);
 
@@ -13,15 +15,18 @@ export default new Router({
     {
       path: "/",
       component: Home,
-      meta: {title: "bamboo主页"},
+      meta: { title: "bamboo主页" },
     },
     {
-      path: "/cssexample",
-      component: Cssexample,
-      meta: {title: "css示例页"},
+      path: "/cssexp",
+      component: CssLayout,
+      children: [
+        { path: "", component: Cssexample, meta: { title: "css示例页" } },
+        { path: "progress", component: CssProgress, meta: { title: "进度条" } },
+        { path: "navrotating", component: NavRotating, meta: { title: "旋转导航" } },
+        { path: "search", component: Search, meta: { title: "搜索框" } },
+      ],
     },
-    {path: "/progress", component: CssProgress, meta: {title: "进度条"}},
-    {path: "/navrotating", component: NavRotating, meta: {title: "旋转导航"}},
-    {path: "*", redirect: "/"},
+    { path: "*", redirect: "/" },
   ],
 });
