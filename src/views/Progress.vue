@@ -58,14 +58,16 @@ export default {
 }
 
 .container {
+  /* 1. 占满全屏的淡灰色背景色; 2. flexbox模式, 确保其在主轴和交叉轴下的居中 */
   background-color: #f6f7fb;
   height: 100vh;
   overflow: hidden;
   margin: 0;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  /* 交叉轴 */
+  align-items: center;
 }
 
 .container-wrapper {
@@ -100,6 +102,7 @@ export default {
   /* 通过 Y 轴的负偏移将伪元素向上移动其自身高度的 50%, 结合top, 确保伪元素在垂直方向居中 */
   transform: translateY(-50%);
 
+  /* 确保这条灰色直线处于最低层级 */
   z-index: -1;
 }
 
@@ -111,25 +114,32 @@ export default {
 */
 .progress {
   background-color: var(--line-border-fill); /* 进度已完成的颜色 */
+
+  /* 注意, 这个位置样式同上面的before伪元素必须保持一致 */
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+
   height: 4px;
   width: 0%;
-  z-index: -1;
+
   transition: 0.4s ease;
+  z-index: -1;
 }
 
+/* 圆形 */
 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: #fff;
   color: #999;
   border-radius: 50%;
   height: 30px;
   width: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   border: 3px solid var(--line-border-empty);
   transition: 0.4s ease;
 }
