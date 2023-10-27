@@ -1,5 +1,5 @@
 <template>
-  <div class="cssexp-layout">
+  <div>
     <!-- 插入子页面内容 -->
     <router-view></router-view>
   </div>

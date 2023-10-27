@@ -10,6 +10,7 @@ const Search = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssex
 const SplitLandPage = () => import("@/views/cssexp/SplitLandPage.vue");
 const WaveLogin = () => import("@/views/cssexp/WaveLogin.vue");
 const Keycodes = () => import("@/views/cssexp/Keycodes.vue");
+const Faq = () => import("@/views/cssexp/Faq.vue");
 
 Vue.use(Router);
 
@@ -31,6 +32,7 @@ export default new Router({
         { path: "splitelangpage", component: SplitLandPage, meta: { title: "切割页面" } },
         { path: "wavelogin", component: WaveLogin, meta: { title: "登录页面" } },
         { path: "keycodes", component: Keycodes, meta: { title: "键盘输入键页面" } },
+        { path: "faq", component: Faq, meta: { title: "FAQ页面" } },
       ],
     },
     { path: "*", redirect: "/" },
