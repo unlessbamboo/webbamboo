@@ -111,7 +111,7 @@ export default {
 .form-control {
   position: relative;
   margin: 20px 0 40px;
-  width: 300px;
+  width: 100%;
 }
 
 .form-control input {
