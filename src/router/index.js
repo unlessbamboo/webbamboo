@@ -7,7 +7,8 @@ const Cssexample = () => import(/* webpackChunkName: "cssexample" */ "@/views/cs
 const CssProgress = () => import(/* webpackChunkName: "progress" */ "@/views/cssexp/Progress.vue");
 const NavRotating = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/NavRotating.vue");
 const Search = () => import(/* webpackChunkName: "navrotating" */ "@/views/cssexp/Search.vue");
-const SplitLandPage = () => import(/* webpackChunkName: "splitelangpage" */ "@/views/cssexp/SplitLandPage.vue");
+const SplitLandPage = () => import("@/views/cssexp/SplitLandPage.vue");
+const WaveLogin = () => import("@/views/cssexp/WaveLogin.vue");
 
 Vue.use(Router);
 
@@ -27,6 +28,7 @@ export default new Router({
         { path: "navrotating", component: NavRotating, meta: { title: "旋转导航" } },
         { path: "search", component: Search, meta: { title: "搜索框" } },
         { path: "splitelangpage", component: SplitLandPage, meta: { title: "切割页面" } },
+        { path: "wavelogin", component: WaveLogin, meta: { title: "登录页面" } },
       ],
     },
     { path: "*", redirect: "/" },
