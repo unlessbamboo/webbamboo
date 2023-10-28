@@ -2,7 +2,9 @@
   <div class="container" @click="disableSearch">
     <div class="search" ref="search">
       <input type="text" class="input" ref="searchInput" placeholder="Search..." />
-      <button class="btn" @click="showSearch"><i class="fa fa-search"></i></button>
+      <button class="btn" @click="showSearch">
+        <font-awesome-icon icon="fa-solid fa-search" />
+      </button>
     </div>
   </div>
 </template>

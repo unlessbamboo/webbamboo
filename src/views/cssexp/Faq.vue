@@ -2,7 +2,7 @@
   <div class="faqcontainer-wrapper">
     <div class="faq-container">
       <h1>Frequently Asked Questions</h1>
-      <div class="faq active" ref="faqactive">
+      <div class="faq active" ref="faqactiveRef">
         <h3 class="faq-title">点击的时候展开并设置背景</h3>
         <p class="faq-text">外边距塌陷: 垂直外边距相遇时会合并为一个外边距, 其大小等于两个合并外边距的较大者</p>
         <p class="faq-text">
@@ -10,23 +10,22 @@
           父元素设置内边距, 添加边框, 设置overflow
         </p>
         <button class="faq-toggle" @click="activeFaq">
-          <i class="fa fa-chevron-down"></i>
-          <i class="fa fa-times"></i>
+          <font-awesome-icon icon="fa-solid fa-chevron-down" />
+          <font-awesome-icon icon="fa-solid fa-circle-xmark" />
         </button>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Faq",
-  methods: {
-    activeFaq() {
-      this.$refs.faqactive.classList.toggle("active");
-    },
-  },
-};
+<script setup name="Faq">
+import { ref } from "vue";
+
+const faqactiveRef = ref(null);
+
+function activeFaq() {
+  faqactiveRef.value.classList.toggle("active");
+}
 </script>
 
 <style scoped>
@@ -65,7 +64,7 @@ h1 {
 .faq.active::before,
 .faq.active::after {
   content: "\f075";
-  font-family: "Font Awesome 4 Free";
+  font-family: "Font Awesome 5 Free";
   color: #2ecc71;
   font-size: 7rem;
   position: absolute;
@@ -116,11 +115,11 @@ h1 {
   outline: 0;
 }
 
-.faq-toggle .fa-times {
+.faq-toggle .fa-circle-xmark {
   display: none;
 }
 
-.faq.active .faq-toggle .fa-times {
+.faq.active .faq-toggle .fa-circle-xmark {
   color: #fff;
   display: block;
 }

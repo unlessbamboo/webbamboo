@@ -1,22 +1,25 @@
-import Vue from "vue";
+import { createApp } from "vue";
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+import * as ElementPlusIconsVue from "@element-plus/icons-vue"; // 引入所有图标，并命名为 Icons
+
 import App from "./App.vue";
 import router from "./router";
-import ElementUI from "element-ui";
-
-import "element-ui/lib/theme-chalk/index.css"; // 默认主题
-// 参考: https://fontawesome.com/v4/icon/bars
-import "font-awesome/css/font-awesome.min.css";
 
 import "@/assets/css/icon.css";
-import "babel-polyfill";
 
-Vue.config.productionTip = false;
+import { FontAwesomeIcon } from "@/icon.js";
 
-Vue.use(ElementUI, {
-  size: "small",
+const app = createApp(App);
+
+// 全局注册
+Object.keys(ElementPlusIconsVue).forEach((key) => {
+  app.component(key, ElementPlusIconsVue[key]);
 });
-
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+app
+  .use(ElementPlus, {
+    size: "small",
+  })
+  .use(router)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");

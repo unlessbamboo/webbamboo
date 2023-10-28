@@ -3,7 +3,7 @@
     <div class="keycontainer">
       <div>
         <div v-if="!showKey" class="key">Press any key to get the keyCode</div>
-        <div v-if="showKey">
+        <div v-else>
           <div class="key">
             {{ keyDisplay }}
             <small>event.key</small>
@@ -29,35 +29,31 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Keycodes",
-  data() {
-    return {
-      showKey: false,
-      keyDisplay: "",
-      keyCode: "",
-      code: "",
-    };
-  },
-  methods: {
-    handleKeydown(event) {
-      this.keyDisplay = event.key === " " ? "Space" : event.key;
-      this.keyCode = event.keyCode;
-      this.code = event.code;
+<script setup name="Keycodes">
+import { ref, onMounted, onUnmounted } from "vue";
 
-      if (!this.showKey) {
-        this.showKey = true;
-      }
-    },
-  },
-  created() {
-    window.addEventListener("keydown", this.handleKeydown);
-  },
-  destroyed() {
-    window.removeEventListener("keydown", this.handleKeydown);
-  },
-};
+const showKey = ref(false);
+const keyDisplay = ref("");
+const keyCode = ref("");
+const code = ref("");
+
+function handleKeydown(event) {
+  keyDisplay.value = event.key === " " ? "Space" : event.key;
+  keyCode.value = event.keyCode;
+  code.value = event.code;
+
+  if (!showKey.value) {
+    showKey.value = true;
+  }
+}
+
+// 生命周期
+onMounted(() => {
+  window.addEventListener("keydown", handleKeydown);
+});
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeydown);
+});
 </script>
 
 <style scoped>

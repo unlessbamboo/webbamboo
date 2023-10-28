@@ -3,11 +3,11 @@
     <div class="carousel-container">
       <div class="carousel-container-ul" @mouseover="pauseInterval" @mouseout="startInterval">
         <!-- a. 向前的图标 -->
-        <i class="el-icon-arrow-left carousel-arrow" @click="scroll(-1)"></i>
+        <el-icon class="carousel-arrow"><ArrowLeft @click="scroll(-1)" /></el-icon>
 
         <!-- b. 中间待滚动card -->
         <div class="options-container">
-          <ul ref="carousel">
+          <ul ref="carouselRef">
             <li>
               <div class="option-wrapper" @click="goTo('shop')">
                 <el-card class="option">
@@ -60,7 +60,7 @@
         </div>
 
         <!-- c. 向后的图标 -->
-        <i class="el-icon-arrow-right carousel-arrow" @click="scroll(1)"></i>
+        <el-icon class="carousel-arrow"><ArrowRight @click="scroll(1)" /></el-icon>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
       <footer>
         <p>
           <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">
-            <img :src="require('@/assets/img/tb1.png')" alt="" style="width: 20px" />
+            <img :src="beianImgUrl" alt="" style="width: 20px" />
           </a>
           <a href="https://beian.miit.gov.cn/" target="_blank" style="color: white; font-size: 20px">
             浙ICP备18007284号-1
@@ -79,84 +79,80 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      autoScrollInterval: null,
-      currentScrollIndex: 0,
-      maxScrollIndex: 2,
-    };
-  },
-  methods: {
-    goTo(destination) {
-      if (destination == "shop") {
-        // window.location.href = process.env.VUE_APP_SHOP_HOST;
-        window.open(process.env.VUE_APP_SHOP_HOST, "_blank");
-      } else if (destination == "blog") {
-        // window.location.href = process.env.VUE_APP_BLOG_HOST;
-        window.open(process.env.VUE_APP_BLOG_HOST, "_blank");
-      } else if (destination == "flask") {
-        // window.location.href = process.env.VUE_APP_SHOP_FLASK_HOST;
-        window.open(process.env.VUE_APP_SHOP_FLASK_HOST, "_blank");
-      } else if (destination == "gin") {
-        // window.location.href = process.env.VUE_APP_SHOP_GIN_HOST;
-        window.open(process.env.VUE_APP_SHOP_GIN_HOST, "_blank");
-      } else if (destination == "django") {
-        // window.location.href = process.env.VUE_APP_SHOP_DJANGO_HOST;
-        window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
-      } else if (destination == "cssexample") {
-        this.$router.push("/cssexp");
-      } else {
-        window.open(process.env.VUE_APP_SHOP_DJANGO_HOST, "_blank");
-      }
-    },
-    /* 根据direction来决定移动 */
-    scroll(direction) {
-      const carousel = this.$refs.carousel;
-      if (!carousel) {
-        return;
-      }
-      const scrollAmount = 330;
-      const step = direction * 10; // 每一帧滚动的距离
-      const frames = scrollAmount / Math.abs(step); // 需要的帧数
-      let frameCount = 0; // 当前帧数
+<script setup name="Home">
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import beianImgUrl from "@/assets/img/tb1.png";
 
-      /* 添加动画效果 */
-      const animateScroll = () => {
-        carousel.scrollLeft += step;
-        frameCount++;
-        if (frameCount < frames) {
-          requestAnimationFrame(animateScroll);
-        }
-      };
+const autoScrollInterval = ref(null);
+const currentScrollIndex = ref(0);
+const maxScrollIndex = ref(2);
+const carouselRef = ref(null);
+const router = useRouter();
+
+function goTo(destination) {
+  if (destination == "shop") {
+    window.open(import.meta.env.VITE_APP_SHOP_HOST, "_blank");
+  } else if (destination == "blog") {
+    window.open(import.meta.env.VITE_APP_BLOG_HOST, "_blank");
+  } else if (destination == "flask") {
+    window.open(import.meta.env.VITE_APP_SHOP_FLASK_HOST, "_blank");
+  } else if (destination == "gin") {
+    window.open(import.meta.env.VITE_APP_SHOP_GIN_HOST, "_blank");
+  } else if (destination == "django") {
+    window.open(import.meta.env.VITE_APP_SHOP_DJANGO_HOST, "_blank");
+  } else if (destination == "cssexample") {
+    router.push({ path: "/cssexp" });
+  } else {
+    window.open(import.meta.env.VITE_APP_SHOP_DJANGO_HOST, "_blank");
+  }
+}
+
+/* 根据direction来决定移动 */
+function scroll(direction) {
+  if (!carouselRef.value) {
+    return;
+  }
+  const scrollAmount = 330;
+  const step = direction * 10; // 每一帧滚动的距离
+  const frames = scrollAmount / Math.abs(step); // 需要的帧数
+  let frameCount = 0; // 当前帧数
+
+  /* 添加动画效果 */
+  const animateScroll = () => {
+    carouselRef.value.scrollLeft += step;
+    frameCount++;
+    if (frameCount < frames) {
       requestAnimationFrame(animateScroll);
-      // carousel.scrollLeft += scrollAmount * direction;
-      this.currentScrollIndex = carousel.scrollLeft / scrollAmount;
-    },
-    /* 启动和暂停定时器 */
-    startInterval() {
-      this.autoScrollInterval = setInterval(() => {
-        if (this.currentScrollIndex >= this.maxScrollIndex) {
-          const carousel = this.$refs.carousel;
-          this.currentScrollIndex = 0;
-          carousel.scrollLeft = 0;
-        } else {
-          this.scroll(1);
-        }
-      }, 5000);
-    },
-    pauseInterval() {
-      clearInterval(this.autoScrollInterval);
-    },
-  },
-  mounted() {
-    this.startInterval();
-  },
-  beforeDestory() {
-    this.pauseInterval();
-  },
-};
+    }
+  };
+  requestAnimationFrame(animateScroll);
+  currentScrollIndex.value = carouselRef.value.scrollLeft / scrollAmount;
+}
+
+/* 启动和暂停定时器 */
+function startInterval() {
+  autoScrollInterval.value = setInterval(() => {
+    if (currentScrollIndex.value >= maxScrollIndex.value) {
+      currentScrollIndex.value = 0;
+      carouselRef.value.scrollLeft = 0;
+    } else {
+      scroll(1);
+    }
+  }, 5000);
+}
+
+function pauseInterval() {
+  clearInterval(autoScrollInterval.value);
+}
+
+// 声明周期注册: 挂载时
+onMounted(() => {
+  startInterval();
+});
+onUnmounted(() => {
+  pauseInterval();
+});
 </script>
 
 <style scoped>
@@ -181,7 +177,7 @@ li {
   height: 100vh;
   justify-content: space-between; /* 将主轴的空间分布在容器的两个子元素之间 */
 
-  background-image: url(~@/assets/img/bg.jpg);
+  background-image: url(@/assets/img/bg.jpg);
   background-size: 100%;
 }
 

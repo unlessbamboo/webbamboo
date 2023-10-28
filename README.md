@@ -1,5 +1,7 @@
 ### 安装和运行
 
+1. vue2 基础安装
+
 基础环境信息
 
 - node: node16
@@ -20,6 +22,12 @@ npm run serve
 npm install -g http-server
 cd /path/to/your/directory
 http-server
+```
+
+2. 安装 postcss
+
+```sh
+npm install -D postcss autoprefixer
 ```
 
 ### 关联项目

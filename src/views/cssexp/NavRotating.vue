@@ -5,10 +5,10 @@
       <div class="circle-container">
         <div class="circle">
           <button id="close" @click="closeNav">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <font-awesome-icon icon="fa-solid fa-circle-xmark" aria-hidden="true" />
           </button>
           <button id="open" @click="openNav">
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            <font-awesome-icon icon="fa-solid fa-bars" />
           </button>
         </div>
       </div>
@@ -50,15 +50,15 @@
     <nav>
       <ul>
         <li>
-          <i class="fa fa-home"></i>
+          <font-awesome-icon icon="fa-solid fa-house" />
           Home
         </li>
         <li>
-          <i class="fa fa-user"></i>
+          <font-awesome-icon icon="fa-solid fa-user" />
           About
         </li>
         <li>
-          <i class="fa fa-envelope"></i>
+          <font-awesome-icon icon="fa-solid fa-envelope" />
           Contact
         </li>
       </ul>
