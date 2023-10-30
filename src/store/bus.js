@@ -1,6 +1,4 @@
-import Vue from 'vue';
+import mitt from "mitt";
 
-// 使用 Event Bus
-const bus = new Vue();
-
+const bus = mitt();
 export default bus;
